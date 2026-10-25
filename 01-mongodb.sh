@@ -16,10 +16,10 @@ fi
 mkdir -p $logs_folder
 
 timestamp(){
-    date "+%F %T"
+    date +"%F %T"
 }
 
-echo "${timestamp} [INFO] === script execution started ===" | tee -a $log_files
+echo "${timestamp} [INFO] === script execution started ===" | tee -a $logs_file
 
 validate(){
     if [ $1 -ne 0 ] ; then
@@ -27,6 +27,7 @@ validate(){
         exit 1
     else
         echo "${timestamp} [INFO] ${2}... {G}SUCCESS${N}"
+    fi
 }
 
 cp mongo.repo /etc/yum.repos.d/mongo.repo
