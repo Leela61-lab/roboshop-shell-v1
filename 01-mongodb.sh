@@ -23,10 +23,10 @@ echo "${timestamp} [INFO] === script execution started ===" | tee -a $logs_file
 
 validate(){
     if [ $1 -ne 0 ] ; then
-        echo "${timestamp} [ERROR] ${2}... ${R}FAILED${N}"
+        echo -e "${timestamp} [ERROR] ${2}... ${R}FAILED${N}"
         exit 1
     else
-        echo "${timestamp} [INFO] ${2}... {G}SUCCESS${N}"
+        echo -e "${timestamp} [INFO] ${2}... {G}SUCCESS${N}"
     fi
 }
 
@@ -39,7 +39,7 @@ systemctl enable mongod &>> $logs_file
 systemctl start mongod
 validate $? "enable and start of mongodb"
 
-sed -i 's/127.0.0.1/0.0.0.0' /etc/mongo.conf
+sed -i -e 's/127.0.0.1/0.0.0.0' /etc/mongo.conf
 validate $? "updating the remote configuration file"
 
 systemctl restart mongod &>> $logs_file
