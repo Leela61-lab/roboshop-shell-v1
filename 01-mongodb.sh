@@ -19,14 +19,14 @@ timestamp(){
     date +"%F %T"
 }
 
-echo "${timestamp} [INFO] === script execution started ===" | tee -a $logs_file
+echo "$(timestamp) [INFO] === script execution started ===" | tee -a $logs_file
 
 validate(){
-    if [ $1 -ne 0 ] ; then
-        echo -e "${timestamp} [ERROR] ${2}... ${R}FAILED${N}"
+    if [ $1 -ne 0 ]; then
+        echo -e "$(timestamp) [ERROR] ${2}..${R}FAILED${N}" | tee -a $logs_file
         exit 1
     else
-        echo -e "${timestamp} [INFO] ${2}... {G}SUCCESS${N}"
+        echo -e "$(timestamp) [INFO] ${2}..${G}SUCCESS${N}" | tee -a $logs_file
     fi
 }
 
@@ -45,5 +45,5 @@ validate $? "updating the remote configuration file"
 systemctl restart mongod &>> $logs_file
 validate $? "restarted mongodb"
 
-echo "${timestamp} [INFO] script executed in $Seconds seconds"
-echo "${timestamp} [INFO] === script executiom completed === | tee -a $logs_file
+echo "$(timestamp) [INFO] script executed in $Seconds seconds"
+echo "$(timestamp) [INFO] === script executiom completed ===" | tee -a $logs_file
