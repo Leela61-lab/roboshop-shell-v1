@@ -53,5 +53,5 @@ do
             }]
         }'
 
-    echo "updated r53 recrd for the $instance"
+    echo "updated r53 record for the $instance"
 done
